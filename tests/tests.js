@@ -1,29 +1,30 @@
-import GoogleSearchPage from '../pageobjects/googlehomepage';
-import SearchResultsPage from '../pageobjects/searchresultspage';
+import Login from '../pageobjects/login';
+import Helper from '../pageobjects/helper';
 import {assert} from 'chai';
 import {argv} from 'yargs';
 import getDriver from '../driverutil/driverutil';
+
 {
     describe, before, after, it
 }
 
-describe('Google Search', function () {
+describe('Login my account', function () {
     let driver;
-    let googlesearchpage;
-    let searchresultspage;
+    let login;
+    let helper;
     this.timeout(50000);
 
     before(async () => {
-        driver = await getDriver(argv.browser)
-        googlesearchpage = new GoogleSearchPage(driver);
-        searchresultspage = new SearchResultsPage(driver);
+        driver = await getDriver(argv.browser);
+        login = new Login(driver);
+        helper = new Helper(driver);
     });
 
-    it('Google Search Test', async function () {
-        await googlesearchpage.navigate();
-        await googlesearchpage.searchfor('Selenium');
-        await searchresultspage.waitUntilPageLoaded();
-        assert.isTrue(await searchresultspage.assertlinkpresent(), 'Selenium Link Present');
+    it('Login test', async function () {
+        await login.navigate();
+        await helper.moveMouse();
+        await login.enterToAccount();
+    
     });
 
     after(() => driver.quit());

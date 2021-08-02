@@ -2,20 +2,20 @@ import {By, until, Key} from "selenium-webdriver";
 
 export default function (driver) {
     const pageobjects = {
-        searchbox: By.name('q')
+        btnEnter: By.css('nav#navbar li:nth-child(5) > ul > li:nth-child(1) > a'),
     };
 
     return {
-        url: "https://www.google.com/",
+        url: "https://routesetters.ru",
         waitUntilVisible: function() {
-            return driver.wait(until.elementLocated(pageobjects.searchbox));
+            return driver.wait(until.elementLocated(pageobjects.btnEnter));
         },
         navigate: function() {
             driver.navigate().to(this.url);
             return this.waitUntilVisible();
         },
-        searchfor: function (text) {
-            return driver.findElement(pageobjects.searchbox).sendKeys(text + Key.RETURN);
+        enterToAccount: function () {
+            return driver.findElement(pageobjects.btnEnter).click();
         }
     };
 }
