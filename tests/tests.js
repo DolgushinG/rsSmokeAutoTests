@@ -24,7 +24,9 @@ describe('Login my account', function () {
         await login.navigate();
         await helper.moveMouse();
         await login.enterToAccount();
-    
+        await helper.waitUntil()
+        var insideAccount = await helper.getText();
+        assert.equal(insideAccount , 'Личный кабинет')
     });
 
     after(() => driver.quit());

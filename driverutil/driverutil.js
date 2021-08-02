@@ -15,7 +15,7 @@ export default function getDriver(browser) {
         case 'FIREFOX':
             return new Builder().forBrowser('firefox').build();
         case 'CHROME':
-            return new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().windowSize(screen)).build();
+            return new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().headless().windowSize(screen)).build();
         case 'IE':
             return new Builder().forBrowser('internet explorer').build();
         case 'EDGE':

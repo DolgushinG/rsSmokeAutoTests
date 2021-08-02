@@ -2,15 +2,17 @@ import {By, until} from "selenium-webdriver";
 
 export default function (driver) {
     const pageobjects = {
+        insideAccountText: By.xpath("//h4[contains(text(),'Личный кабинет')]"),
         navBarElementAuth: By.css("#navbar > ul > li:nth-child(5)")
     };
 
     return {
         waitUntil: function() {
-            return driver.wait(until.elementLocated(pageobjects.btnEnter), 5);
+            let by = pageobjects.insideAccountText;
+            return driver.wait(until.elementLocated(by, 10));
         },
-        assertTextPresent: function() {
-            return driver.findElement(pageobjects.btnEnter).getText();
+        getText: function() {
+            return driver.findElement(pageobjects.insideAccountText).getText();
         },
         moveMouse: function() {
             const actions = driver.actions({bridge: true}); 
